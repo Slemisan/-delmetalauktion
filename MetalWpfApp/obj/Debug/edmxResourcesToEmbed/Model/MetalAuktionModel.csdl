@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MetalauktionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MetalauktionEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Købstilbud" EntityType="MetalauktionModel.Købstilbud" />
+    <EntitySet Name="Kunde" EntityType="MetalauktionModel.Kunde" />
+    <EntitySet Name="Salgsudbud" EntityType="MetalauktionModel.Salgsudbud" />
+    <AssociationSet Name="FK__Købstilbu__Kunde__7C4F7684" Association="MetalauktionModel.FK__Købstilbu__Kunde__7C4F7684">
+      <End Role="Kunde" EntitySet="Kunde" />
+      <End Role="Købstilbud" EntitySet="Købstilbud" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Købstilbu__Salgs__7B5B524B" Association="MetalauktionModel.FK__Købstilbu__Salgs__7B5B524B">
+      <End Role="Salgsudbud" EntitySet="Salgsudbud" />
+      <End Role="Købstilbud" EntitySet="Købstilbud" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Købstilbud">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pris" Type="Int32" Nullable="false" />
+    <Property Name="SalgsudbudId" Type="Int32" Nullable="false" />
+    <Property Name="KundeId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Kunde" Relationship="MetalauktionModel.FK__Købstilbu__Kunde__7C4F7684" FromRole="Købstilbud" ToRole="Kunde" />
+    <NavigationProperty Name="Salgsudbud" Relationship="MetalauktionModel.FK__Købstilbu__Salgs__7B5B524B" FromRole="Købstilbud" ToRole="Salgsudbud" />
+  </EntityType>
+  <EntityType Name="Kunde">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Navn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Købstilbud" Relationship="MetalauktionModel.FK__Købstilbu__Kunde__7C4F7684" FromRole="Kunde" ToRole="Købstilbud" />
+  </EntityType>
+  <EntityType Name="Salgsudbud">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="MetalType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Gram" Type="Int32" Nullable="false" />
+    <Property Name="Tidsfrist" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Aktiv" Type="Boolean" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Købstilbud" Relationship="MetalauktionModel.FK__Købstilbu__Salgs__7B5B524B" FromRole="Salgsudbud" ToRole="Købstilbud" />
+  </EntityType>
+  <Association Name="FK__Købstilbu__Kunde__7C4F7684">
+    <End Type="MetalauktionModel.Kunde" Role="Kunde" Multiplicity="1" />
+    <End Type="MetalauktionModel.Købstilbud" Role="Købstilbud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kunde">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="Købstilbud">
+        <PropertyRef Name="KundeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Købstilbu__Salgs__7B5B524B">
+    <End Type="MetalauktionModel.Salgsudbud" Role="Salgsudbud" Multiplicity="1" />
+    <End Type="MetalauktionModel.Købstilbud" Role="Købstilbud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Salgsudbud">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Købstilbud">
+        <PropertyRef Name="SalgsudbudId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

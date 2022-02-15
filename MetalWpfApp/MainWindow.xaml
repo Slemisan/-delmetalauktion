@@ -1,0 +1,43 @@
+﻿<Window x:Class="MetalWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MetalWpfApp"
+        mc:Ignorable="d"
+        Title="Systemprogram for Metalauktion A/S" Height="460" Width="679.333" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Grid Margin="0,0,4,0">
+        <DataGrid x:Name="SalgsudbudGrid" AutoGenerateColumns="False" AlternatingRowBackground="Azure" AlternationCount="2" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" Margin="0,0,5,161">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="MetalColumn" Binding="{Binding MetalType}" Header="Metaltype" Width="70" CanUserResize="False"/>
+                <DataGridTextColumn x:Name="GramColumn" Binding="{Binding Gram}" Header="Vægt i g" Width="55" CanUserResize="False"/>
+                <DataGridTextColumn x:Name="TidsfristColumn" Binding="{Binding Tidsfrist}" Header="Tid tilbage (Dag - Timer - Minutter - Sekunder)" Width="*" CanUserResize="False"/>
+                
+                <DataGridTextColumn x:Name="Bud" Binding="{Binding Pris}" Header="Højeste bud" CanUserResize="False"/> 
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock HorizontalAlignment="Center" Margin="10,275,283,0" TextWrapping="Wrap" Text="Opret nyt salgsudbud til auktion" VerticalAlignment="Top" FontSize="15" Width="364"/>
+
+        <TextBlock HorizontalAlignment="Left" Height="30" Width="146" Margin="10,313,0,88" TextWrapping="Wrap" Text="Vælg metaltype:" VerticalAlignment="Center" />
+        <ComboBox x:Name="MetalComboBox" HorizontalAlignment="Left" Height="30" Width="170" Margin="161,313,0,0" VerticalAlignment="Top"/>
+
+        <TextBlock HorizontalAlignment="Left" Height="30" Width="146" Margin="10,348,0,53" TextWrapping="Wrap" Text="Indtast vægt i gram:" VerticalAlignment="Center"/>
+        <TextBox x:Name="GramTextBox" HorizontalAlignment="Left" Height="30" Width="170" Margin="161,348,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+        <TextBlock HorizontalAlignment="Left" Height="30" Width="146" Margin="336,313,0,88" TextWrapping="Wrap" Text="Vælg udløbsdato:" VerticalAlignment="Center"/>
+        <DatePicker x:Name="UdløbDatePicker" HorizontalAlignment="Left" Height="30" Width="170" Margin="482,313,0,0" VerticalAlignment="Top"/>
+
+        <TextBlock HorizontalAlignment="Left" Height="30" Width="146" Margin="336,348,0,53" TextWrapping="Wrap" Text="Vælg udløbstidspunkt:" VerticalAlignment="Center"/>
+        <ComboBox x:Name="TimeComboBox" HorizontalAlignment="Left" Margin="482,348,0,0" VerticalAlignment="Top" Height="30" Width="80"/>
+
+        <Label Content="  :" HorizontalAlignment="Left" Margin="554,348,0,0" VerticalAlignment="Top" Height="30" Width="30"/>
+        <ComboBox x:Name="MinutComboBox" HorizontalAlignment="Left" Margin="572,348,0,0" VerticalAlignment="Top" Height="30" Width="80"/>
+
+
+        <Button Content="Opret" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="642" Height="30" Click="Button_Click"/>
+
+
+
+    </Grid>
+</Window>

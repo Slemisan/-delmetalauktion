@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MetalauktionModelStoreContainer" CdmEntityContainer="MetalauktionEntities">
+    <EntitySetMapping Name="Købstilbud">
+      <EntityTypeMapping TypeName="MetalauktionModel.Købstilbud">
+        <MappingFragment StoreEntitySet="Købstilbud">
+          <ScalarProperty Name="KundeId" ColumnName="KundeId" />
+          <ScalarProperty Name="SalgsudbudId" ColumnName="SalgsudbudId" />
+          <ScalarProperty Name="Pris" ColumnName="Pris" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kunde">
+      <EntityTypeMapping TypeName="MetalauktionModel.Kunde">
+        <MappingFragment StoreEntitySet="Kunde">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Navn" ColumnName="Navn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salgsudbud">
+      <EntityTypeMapping TypeName="MetalauktionModel.Salgsudbud">
+        <MappingFragment StoreEntitySet="Salgsudbud">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Aktiv" ColumnName="Aktiv" />
+          <ScalarProperty Name="Tidsfrist" ColumnName="Tidsfrist" />
+          <ScalarProperty Name="Gram" ColumnName="Gram" />
+          <ScalarProperty Name="MetalType" ColumnName="MetalType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

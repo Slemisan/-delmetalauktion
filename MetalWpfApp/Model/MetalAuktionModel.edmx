@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MetalauktionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Købstilbud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pris" Type="int" Nullable="false" />
+          <Property Name="SalgsudbudId" Type="int" Nullable="false" />
+          <Property Name="KundeId" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kunde">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Navn" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salgsudbud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="MetalType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Gram" Type="int" Nullable="false" />
+          <Property Name="Tidsfrist" Type="datetime" Nullable="false" />
+          <Property Name="Aktiv" Type="bit" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Købstilbu__Kunde__7C4F7684">
+          <End Role="Kunde" Type="Self.Kunde" Multiplicity="1" />
+          <End Role="Købstilbud" Type="Self.Købstilbud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kunde">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="Købstilbud">
+              <PropertyRef Name="KundeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Købstilbu__Salgs__7B5B524B">
+          <End Role="Salgsudbud" Type="Self.Salgsudbud" Multiplicity="1" />
+          <End Role="Købstilbud" Type="Self.Købstilbud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salgsudbud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Købstilbud">
+              <PropertyRef Name="SalgsudbudId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MetalauktionModelStoreContainer">
+          <EntitySet Name="Købstilbud" EntityType="Self.Købstilbud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kunde" EntityType="Self.Kunde" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salgsudbud" EntityType="Self.Salgsudbud" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Købstilbu__Kunde__7C4F7684" Association="Self.FK__Købstilbu__Kunde__7C4F7684">
+            <End Role="Kunde" EntitySet="Kunde" />
+            <End Role="Købstilbud" EntitySet="Købstilbud" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Købstilbu__Salgs__7B5B524B" Association="Self.FK__Købstilbu__Salgs__7B5B524B">
+            <End Role="Salgsudbud" EntitySet="Salgsudbud" />
+            <End Role="Købstilbud" EntitySet="Købstilbud" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MetalauktionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MetalauktionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Købstilbud" EntityType="MetalauktionModel.Købstilbud" />
+          <EntitySet Name="Kunde" EntityType="MetalauktionModel.Kunde" />
+          <EntitySet Name="Salgsudbud" EntityType="MetalauktionModel.Salgsudbud" />
+          <AssociationSet Name="FK__Købstilbu__Kunde__7C4F7684" Association="MetalauktionModel.FK__Købstilbu__Kunde__7C4F7684">
+            <End Role="Kunde" EntitySet="Kunde" />
+            <End Role="Købstilbud" EntitySet="Købstilbud" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Købstilbu__Salgs__7B5B524B" Association="MetalauktionModel.FK__Købstilbu__Salgs__7B5B524B">
+            <End Role="Salgsudbud" EntitySet="Salgsudbud" />
+            <End Role="Købstilbud" EntitySet="Købstilbud" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Købstilbud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pris" Type="Int32" Nullable="false" />
+          <Property Name="SalgsudbudId" Type="Int32" Nullable="false" />
+          <Property Name="KundeId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Kunde" Relationship="MetalauktionModel.FK__Købstilbu__Kunde__7C4F7684" FromRole="Købstilbud" ToRole="Kunde" />
+          <NavigationProperty Name="Salgsudbud" Relationship="MetalauktionModel.FK__Købstilbu__Salgs__7B5B524B" FromRole="Købstilbud" ToRole="Salgsudbud" />
+        </EntityType>
+        <EntityType Name="Kunde">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Navn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Købstilbud" Relationship="MetalauktionModel.FK__Købstilbu__Kunde__7C4F7684" FromRole="Kunde" ToRole="Købstilbud" />
+        </EntityType>
+        <EntityType Name="Salgsudbud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="MetalType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Gram" Type="Int32" Nullable="false" />
+          <Property Name="Tidsfrist" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Aktiv" Type="Boolean" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Købstilbud" Relationship="MetalauktionModel.FK__Købstilbu__Salgs__7B5B524B" FromRole="Salgsudbud" ToRole="Købstilbud" />
+        </EntityType>
+        <Association Name="FK__Købstilbu__Kunde__7C4F7684">
+          <End Type="MetalauktionModel.Kunde" Role="Kunde" Multiplicity="1" />
+          <End Type="MetalauktionModel.Købstilbud" Role="Købstilbud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kunde">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="Købstilbud">
+              <PropertyRef Name="KundeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Købstilbu__Salgs__7B5B524B">
+          <End Type="MetalauktionModel.Salgsudbud" Role="Salgsudbud" Multiplicity="1" />
+          <End Type="MetalauktionModel.Købstilbud" Role="Købstilbud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salgsudbud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Købstilbud">
+              <PropertyRef Name="SalgsudbudId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MetalauktionModelStoreContainer" CdmEntityContainer="MetalauktionEntities">
+          <EntitySetMapping Name="Købstilbud">
+            <EntityTypeMapping TypeName="MetalauktionModel.Købstilbud">
+              <MappingFragment StoreEntitySet="Købstilbud">
+                <ScalarProperty Name="KundeId" ColumnName="KundeId" />
+                <ScalarProperty Name="SalgsudbudId" ColumnName="SalgsudbudId" />
+                <ScalarProperty Name="Pris" ColumnName="Pris" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kunde">
+            <EntityTypeMapping TypeName="MetalauktionModel.Kunde">
+              <MappingFragment StoreEntitySet="Kunde">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Navn" ColumnName="Navn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salgsudbud">
+            <EntityTypeMapping TypeName="MetalauktionModel.Salgsudbud">
+              <MappingFragment StoreEntitySet="Salgsudbud">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Aktiv" ColumnName="Aktiv" />
+                <ScalarProperty Name="Tidsfrist" ColumnName="Tidsfrist" />
+                <ScalarProperty Name="Gram" ColumnName="Gram" />
+                <ScalarProperty Name="MetalType" ColumnName="MetalType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
